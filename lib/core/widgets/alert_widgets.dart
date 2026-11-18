@@ -153,9 +153,12 @@ class AlertTile extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CircleAvatar(
-                    backgroundColor: alert.severity.color,
-                    child: Icon(alert.severity.icon, color: Colors.white),
+                  _CriticalPulse(
+                    enabled: alert.severity == Severity.critico,
+                    child: CircleAvatar(
+                      backgroundColor: alert.severity.color,
+                      child: Icon(alert.severity.icon, color: Colors.white),
+                    ),
                   ),
                   const SizedBox(width: AppSpacing.md),
                   Expanded(
@@ -198,4 +201,53 @@ class AlertTile extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Três pulsos curtos ao exibir um alerta crítico: chama a atenção para a
+/// prioridade sem animar indefinidamente (não distrai nem cansa a leitura).
+class _CriticalPulse extends StatefulWidget {
+  const _CriticalPulse({required this.enabled, required this.child});
+  final bool enabled;
+  final Widget child;
+
+  @override
+  State<_CriticalPulse> createState() => _CriticalPulseState();
+}
+
+class _CriticalPulseState extends State<_CriticalPulse>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+      vsync: this, duration: const Duration(milliseconds: 2400));
+  late final Animation<double> _scale = TweenSequence<double>([
+    for (var i = 0; i < 3; i++) ...[
+      TweenSequenceItem(
+          tween: Tween(begin: 1.0, end: 1.18)
+              .chain(CurveTween(curve: Curves.easeOut)),
+          weight: 1),
+      TweenSequenceItem(
+          tween: Tween(begin: 1.18, end: 1.0)
+              .chain(CurveTween(curve: Curves.easeIn)),
+          weight: 1),
+    ],
+  ]).animate(_controller);
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (widget.enabled &&
+        !MediaQuery.disableAnimationsOf(context) &&
+        _controller.isDismissed) {
+      _controller.forward();
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) =>
+      ScaleTransition(scale: _scale, child: widget.child);
 }

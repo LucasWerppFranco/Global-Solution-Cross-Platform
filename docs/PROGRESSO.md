@@ -97,6 +97,16 @@ Registro de cada etapa, com o que foi feito e a revisão aplicada. Referência: 
 - `appWithState()` em `app.dart`: a mesma montagem de estado é usada por `main` e pelos testes.
 - Resultado: `analyze` sem problemas e **29/29 testes passando**.
 
+## Etapa 13: Animações com propósito
+Todas usam só o SDK e ficam instantâneas quando o sistema pede para reduzir movimento (`AppMotion.of`).
+1. **Contador do benefício social**: o número sobe ao revisar um alerta e mostra o efeito da decisão humana.
+2. **Gráfico se desenhando**: o histórico aparece da esquerda para a direita e depois a projeção tracejada, separando o observado do previsto.
+3. **Barras preenchendo** (`AnimatedBar`): confiança, consumo em relação ao limiar, ocorrências e supervisão humana.
+4. **Pulso no alerta crítico**: 3 pulsos e para, chamando atenção para a prioridade sem animar indefinidamente (há teste garantindo que termina).
+6. **Transição "para frente"** (`FadeForwardsPageTransitionsBuilder`) entre as telas, indicando descida na hierarquia.
+
+Resultado: `analyze` sem problemas e 29/29 testes passando.
+
 ---
 
 ## Conferência com o checklist do enunciado

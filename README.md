@@ -52,6 +52,7 @@
 - [x] Dois formulários com validação: registro de ocorrência (cidadão) e limiares de alerta (gestor)
 - [x] Indicador de benefício social na Visão geral
 - [x] Tema próprio com componentes reutilizáveis, **modo escuro** e **alto contraste**
+- [x] Animações com propósito: contador do benefício social, gráficos que se desenham (observado → projeção), barras que se preenchem, pulso em alertas críticos e transição entre telas. Respeitam a opção de reduzir movimento do sistema
 - [x] Acessibilidade: rótulos para leitor de tela, ajuste de fonte até 200% e alvos de toque ≥ 48 dp
 - [x] 29 testes automatizados: unidade (motor de alertas, validações), widget e um teste de fumaça que percorre todas as telas em celular, tablet, fonte 200% e tema escuro com alto contraste
 - [x] Layout responsivo (1 coluna no celular, 2 ou mais em tablet/web)

@@ -10,6 +10,15 @@ abstract final class AppSpacing {
   static const page = EdgeInsets.all(md);
 }
 
+/// Duração padrão das animações. Com "reduzir movimento" ativo no sistema,
+/// tudo vira instantâneo.
+abstract final class AppMotion {
+  static const medium = Duration(milliseconds: 900);
+
+  static Duration of(BuildContext context, [Duration d = medium]) =>
+      MediaQuery.disableAnimationsOf(context) ? Duration.zero : d;
+}
+
 /// Cores da identidade "Território Vivo".
 /// As cores de severidade são sempre usadas como fundo com texto branco
 /// (contraste ≥ 4,5:1 nos temas claro, escuro e alto contraste).
@@ -88,6 +97,16 @@ abstract final class AppTheme {
         ),
       ),
       snackBarTheme: const SnackBarThemeData(behavior: SnackBarBehavior.floating),
+      // Transição "para frente" (fade + deslize): comunica que o usuário está
+      // descendo na hierarquia (visão geral → painel → indicador → alerta).
+      pageTransitionsTheme: const PageTransitionsTheme(builders: {
+        TargetPlatform.android: FadeForwardsPageTransitionsBuilder(),
+        TargetPlatform.iOS: FadeForwardsPageTransitionsBuilder(),
+        TargetPlatform.linux: FadeForwardsPageTransitionsBuilder(),
+        TargetPlatform.macOS: FadeForwardsPageTransitionsBuilder(),
+        TargetPlatform.windows: FadeForwardsPageTransitionsBuilder(),
+        TargetPlatform.fuchsia: FadeForwardsPageTransitionsBuilder(),
+      }),
     );
   }
 }

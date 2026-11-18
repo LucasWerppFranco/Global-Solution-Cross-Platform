@@ -179,10 +179,9 @@ class _RecursosHighlights extends StatelessWidget {
                           children: [
                             Text(i.spec.name, style: theme.textTheme.titleSmall),
                             const SizedBox(height: AppSpacing.xs),
-                            LinearProgressIndicator(
-                              value: ratio.clamp(0.0, 1.0).toDouble(),
+                            AnimatedBar(
+                              value: ratio,
                               minHeight: 12,
-                              borderRadius: BorderRadius.circular(6),
                               color: ratio >= 1 ? theme.colorScheme.error : null,
                             ),
                             const SizedBox(height: AppSpacing.xs),

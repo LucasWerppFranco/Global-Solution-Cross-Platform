@@ -5,6 +5,7 @@ import '../../core/format.dart';
 import '../../core/routes.dart';
 import '../../core/theme.dart';
 import '../../core/widgets/alert_widgets.dart';
+import '../../core/widgets/charts.dart';
 import '../../core/widgets/state_views.dart';
 import '../../data/models.dart';
 import '../../data/territory.dart';
@@ -135,10 +136,17 @@ class _SocialImpactCard extends StatelessWidget {
                 ),
               ],
             ),
-            Text(
-              fmtInt(impact.peopleBenefited),
-              style: theme.textTheme.headlineMedium
-                  ?.copyWith(color: scheme.onPrimaryContainer),
+            // O número "sobe" quando um alerta é revisado: mostra o efeito
+            // da decisão humana no indicador social.
+            TweenAnimationBuilder<double>(
+              tween: Tween(begin: 0, end: impact.peopleBenefited.toDouble()),
+              duration: AppMotion.of(context),
+              curve: Curves.easeOutCubic,
+              builder: (context, v, child) => Text(
+                fmtInt(v.round()),
+                style: theme.textTheme.headlineMedium
+                    ?.copyWith(color: scheme.onPrimaryContainer),
+              ),
             ),
             Text(
               'moradores potencialmente beneficiados por alertas revisados por gestores',
@@ -151,11 +159,7 @@ class _SocialImpactCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  LinearProgressIndicator(
-                    value: impact.supervisionRate,
-                    minHeight: 8,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
+                  AnimatedBar(value: impact.supervisionRate, minHeight: 8),
                   const SizedBox(height: AppSpacing.xs),
                   Text(
                     'Supervisão humana: ${impact.decided} de ${impact.total} alertas avaliados',

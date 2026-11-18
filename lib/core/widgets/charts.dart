@@ -40,8 +40,15 @@ class TrendChart extends StatelessWidget {
       child: SizedBox(
         height: height,
         width: double.infinity,
-        child: CustomPaint(
+        // Histórico se desenha da esquerda para a direita e, depois, a
+        // projeção tracejada: separa visualmente o observado do previsto.
+        child: TweenAnimationBuilder<double>(
+          tween: Tween(begin: 0, end: 1),
+          duration: AppMotion.of(context),
+          curve: Curves.easeOutCubic,
+          builder: (context, progress, child) => CustomPaint(
           painter: _TrendPainter(
+            progress: progress,
             history: history,
             projection: projection,
             threshold: threshold,
@@ -57,6 +64,7 @@ class TrendChart extends StatelessWidget {
                 MediaQuery.textScalerOf(context).clamp(maxScaleFactor: 1.4),
           ),
         ),
+        ),
       ),
     );
   }
@@ -64,6 +72,7 @@ class TrendChart extends StatelessWidget {
 
 class _TrendPainter extends CustomPainter {
   _TrendPainter({
+    required this.progress,
     required this.history,
     required this.projection,
     required this.threshold,
@@ -77,6 +86,7 @@ class _TrendPainter extends CustomPainter {
     required this.textScaler,
   });
 
+  final double progress; // 0..1: 70% para o histórico, 30% para a projeção
   final List<DataPoint> history;
   final List<DataPoint> projection;
   final double? threshold;
@@ -152,13 +162,16 @@ class _TrendPainter extends CustomPainter {
         line.lineTo(x, y);
       }
     }
+    final histT = (progress / 0.7).clamp(0.0, 1.0);
+    final projT = ((progress - 0.7) / 0.3).clamp(0.0, 1.0);
     final fill = Path.from(line)
       ..lineTo(xAt(history.length - 1), chart.bottom)
       ..lineTo(xAt(0), chart.bottom)
       ..close();
-    canvas.drawPath(fill, Paint()..color = lineColor.withValues(alpha: 0.12));
     canvas.drawPath(
-      line,
+        fill, Paint()..color = lineColor.withValues(alpha: 0.12 * histT));
+    canvas.drawPath(
+      _partial(line, histT),
       Paint()
         ..color = lineColor
         ..strokeWidth = compact ? 2 : 2.5
@@ -179,9 +192,11 @@ class _TrendPainter extends CustomPainter {
           ..color = projectionColor
           ..strokeWidth = 2.5
           ..style = PaintingStyle.stroke,
+        upTo: projT,
       );
     }
 
+    if (histT < 1) return;
     canvas.drawCircle(
       Offset(xAt(history.length - 1), yAt(history.last.value)),
       compact ? 3 : 4.5,
@@ -189,10 +204,20 @@ class _TrendPainter extends CustomPainter {
     );
   }
 
-  void _dashed(Canvas canvas, Path path, Paint paint) {
+  /// Trecho inicial do caminho, de 0 até a fração [t] do comprimento.
+  Path _partial(Path path, double t) {
+    final out = Path();
     for (final m in path.computeMetrics()) {
-      for (var d = 0.0; d < m.length; d += 10) {
-        canvas.drawPath(m.extractPath(d, math.min(d + 6, m.length)), paint);
+      out.addPath(m.extractPath(0, m.length * t), Offset.zero);
+    }
+    return out;
+  }
+
+  void _dashed(Canvas canvas, Path path, Paint paint, {double upTo = 1}) {
+    for (final m in path.computeMetrics()) {
+      final end = m.length * upTo;
+      for (var d = 0.0; d < end; d += 10) {
+        canvas.drawPath(m.extractPath(d, math.min(d + 6, end)), paint);
       }
     }
   }
@@ -209,6 +234,7 @@ class _TrendPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _TrendPainter old) =>
+      old.progress != progress ||
       old.history != history ||
       old.projection != projection ||
       old.threshold != threshold ||
@@ -275,11 +301,7 @@ class HorizontalBars extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: AppSpacing.xs),
-                  LinearProgressIndicator(
-                    value: max == 0 ? 0 : value / max,
-                    minHeight: 10,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
+                  AnimatedBar(value: max == 0 ? 0 : value / max),
                 ],
               ),
             ),
@@ -287,4 +309,26 @@ class HorizontalBars extends StatelessWidget {
       ],
     );
   }
+}
+
+/// Barra de progresso que se preenche até [value] (0..1), comunicando a
+/// proporção (confiança, consumo em relação ao limiar, contagens).
+class AnimatedBar extends StatelessWidget {
+  const AnimatedBar({super.key, required this.value, this.minHeight = 10, this.color});
+  final double value;
+  final double minHeight;
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) => TweenAnimationBuilder<double>(
+        tween: Tween(begin: 0, end: value.clamp(0.0, 1.0).toDouble()),
+        duration: AppMotion.of(context),
+        curve: Curves.easeOutCubic,
+        builder: (context, v, child) => LinearProgressIndicator(
+          value: v,
+          minHeight: minHeight,
+          color: color,
+          borderRadius: BorderRadius.circular(minHeight / 2),
+        ),
+      );
 }

@@ -97,11 +97,7 @@ class AlertDetailScreen extends StatelessWidget {
                   children: [
                     ConfidenceBadge(alert: alert),
                     const SizedBox(height: AppSpacing.sm),
-                    LinearProgressIndicator(
-                      value: alert.confidenceScore,
-                      minHeight: 10,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
+                    AnimatedBar(value: alert.confidenceScore),
                     const SizedBox(height: AppSpacing.sm),
                     Text(alert.confidenceRationale),
                   ],

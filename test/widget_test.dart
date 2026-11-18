@@ -30,6 +30,9 @@ void main() {
     ).single;
 
     await tester.pumpWidget(_wrap(AlertTile(alert: alert)));
+    // O pulso do alerta crítico é finito: pumpAndSettle falharia se fosse infinito.
+    expect(find.byType(ScaleTransition), findsWidgets);
+    await tester.pumpAndSettle();
 
     expect(find.text('Consumo de água acima do limiar'), findsOneWidget);
     expect(find.text('Crítico'), findsOneWidget);
