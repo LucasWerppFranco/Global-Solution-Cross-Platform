@@ -204,7 +204,13 @@ DOCKER_ARGS="-p 8080:8080" ./scripts/flutter.sh run -d web-server --web-hostname
 
 ## 10. Vídeo
 
-▶️ **Demonstração (até 3 min):** _link a adicionar_
+<p align="center">
+  <a href="https://youtu.be/25I8QykbYW4" title="Assistir à demonstração no YouTube">
+    <img src="https://img.youtube.com/vi/25I8QykbYW4/maxresdefault.jpg" alt="Vídeo de demonstração do Território Vivo (clique para assistir no YouTube)" width="100%">
+  </a>
+</p>
+
+▶️ **Demonstração (até 3 min):** [territorio vivo demo](https://youtu.be/25I8QykbYW4). Clique na imagem acima para assistir no YouTube.
 
 ## 11. Licença
 
