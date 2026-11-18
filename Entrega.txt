@@ -1,0 +1,8 @@
+=== GLOBAL SOLUTION 2026.2 ===
+Disciplina: Cross-Platform Application Development
+
+Desafio: Territory Predictive Insights
+
+Integrante 1: Lucas Franco - RM: 556044
+Integrante 2: Lucca Roseto - RM: 564180
+Integrante 3: Massayoshi Bando - RM: 561779
