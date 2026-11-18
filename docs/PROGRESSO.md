@@ -132,7 +132,7 @@ Resultado: `analyze` sem problemas e 29/29 testes passando.
 | Layout em 2 tamanhos | ✅ celular e tablet, também com fonte 200% | `test/app_smoke_test.dart` |
 | Sem código morto/print/imports não usados | ✅ `flutter analyze`: No issues found | |
 | App roda sem erros | ✅ build web/APK e percurso completo sem exceções | `test/app_smoke_test.dart`; conferir visualmente |
-| Prints de todas as telas no README | ⏳ capturar | `assets/screenshots/` |
+| Prints de todas as telas no README | ✅ 21 capturas | `assets/screenshots/` |
 | Vídeo ≤ 3 min | ⏳ gravar | |
 | APK em Releases | ⏳ gerado (`build/app/outputs/flutter-apk/app-release.apk`, 56 MB), falta publicar | |
 
