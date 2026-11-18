@@ -27,20 +27,53 @@
 | Massayoshi Bando | 561779 |
 
 ## 4. Demonstração visual
+> Capturas do app rodando no navegador (Flutter Web) em uma janela de 412 × 860 px, equivalente a um celular. Imagens em `assets/screenshots/`.
 
-> Imagens em `assets/screenshots/`.
+**Primeiro acesso e visão geral**
 
 | | | |
 |:---:|:---:|:---:|
-| <img src="assets/screenshots/01_consentimento.png" width="220"><br>**Consentimento**: termo LGPD obrigatório no 1º uso | <img src="assets/screenshots/02_visao_geral.png" width="220"><br>**Visão geral**: impacto social, painéis e alertas prioritários | <img src="assets/screenshots/03_painel_clima.png" width="220"><br>**Painel Clima**: dados reais e previsão de 7 dias |
-| <img src="assets/screenshots/04_painel_recursos.png" width="220"><br>**Painel Recursos**: consumo × limiar e projeção | <img src="assets/screenshots/05_painel_servicos.png" width="220"><br>**Painel Serviços**: UBS, zeladoria e ocorrências | <img src="assets/screenshots/06_indicador.png" width="220"><br>**Detalhe do indicador**: histórico, projeção e estatísticas |
-| <img src="assets/screenshots/07_alertas.png" width="220"><br>**Alertas**: lista com filtros por severidade | <img src="assets/screenshots/08_alerta_detalhe.png" width="220"><br>**Detalhe do alerta**: evidências, confiança e limitações | <img src="assets/screenshots/09_decisao.png" width="220"><br>**Decisão humana**: revisar ou descartar, com nota |
-| <img src="assets/screenshots/10_ocorrencias.png" width="220"><br>**Ocorrências**: registros anônimos e offline | <img src="assets/screenshots/11_formulario_erros.png" width="220"><br>**Formulário**: validação e mensagens de erro | <img src="assets/screenshots/12_limiares.png" width="220"><br>**Limiares**: configuração com validação de faixa |
-| <img src="assets/screenshots/13_ajustes.png" width="220"><br>**Ajustes**: tema, alto contraste, fonte e privacidade | <img src="assets/screenshots/14_offline.png" width="220"><br>**Offline**: dados em cache e confiança reduzida | <img src="assets/screenshots/15_escuro_contraste.png" width="220"><br>**Modo escuro / alto contraste** |
+| <img src="assets/screenshots/01_consentimento.png" width="220" alt="Consentimento"><br>**Consentimento**: termo LGPD obrigatório no 1º uso; o botão só libera após marcar a caixa | <img src="assets/screenshots/02_visao_geral.png" width="220" alt="Visão geral"><br>**Visão geral**: aviso de decisão humana, indicador de benefício social e atalhos para os painéis | <img src="assets/screenshots/19_tema_claro.png" width="220" alt="Tema claro"><br>**Tema claro**: a mesma tela no tema claro |
+
+**Dashboards territoriais**
+
+| | | |
+|:---:|:---:|:---:|
+| <img src="assets/screenshots/03_painel_clima.png" width="220" alt="Painel Clima"><br>**Painel Clima**: temperatura, chuva e PM2.5 reais (Open-Meteo), com variação em 7 dias e limiar | <img src="assets/screenshots/04_painel_recursos.png" width="220" alt="Painel Recursos"><br>**Painel Recursos**: água, energia e resíduos (sintéticos) com indicadores acima do limiar | <img src="assets/screenshots/05_painel_servicos.png" width="220" alt="Painel Serviços"><br>**Painel Serviços**: UBS, zeladoria (156) e ocorrências cidadãs, com estado de lista vazia |
+
+**Indicador e alertas**
+
+| | | |
+|:---:|:---:|:---:|
+| <img src="assets/screenshots/06_indicador.png" width="220" alt="Detalhe do indicador"><br>**Detalhe do indicador**: histórico de 30 dias, previsão oficial tracejada, limiar e estatísticas | <img src="assets/screenshots/07_alertas.png" width="220" alt="Alertas"><br>**Alertas**: lista com filtros por severidade e selos de confiança | <img src="assets/screenshots/08_alerta_detalhe.png" width="220" alt="Detalhe do alerta"><br>**Detalhe do alerta**: severidade, aviso de decisão humana e justificativa com evidências |
+
+**Transparência e decisão humana**
+
+| | | |
+|:---:|:---:|:---:|
+| <img src="assets/screenshots/09_confianca_limitacoes.png" width="220" alt="Confiança e limitações"><br>**Confiança e limitações**: nível de confiança com o motivo da nota e quando não confiar | <img src="assets/screenshots/10_decisao_humana.png" width="220" alt="Decisão humana"><br>**Decisão humana**: o gestor marca como revisado ou descarta, com nota opcional | <img src="assets/screenshots/11_decisao_registrada.png" width="220" alt="Decisão registrada"><br>**Decisão registrada**: avaliação salva localmente, sem nenhuma ação automática |
+
+**Ocorrências cidadãs (formulário)**
+
+| | | |
+|:---:|:---:|:---:|
+| <img src="assets/screenshots/12_ocorrencias_vazio.png" width="220" alt="Ocorrências (vazia)"><br>**Ocorrências (vazia)**: estado de lista vazia e aviso de anonimato | <img src="assets/screenshots/14_formulario_erros.png" width="220" alt="Formulário com erros"><br>**Formulário com erros**: validação de campos obrigatórios e bloqueio de e-mail na descrição | <img src="assets/screenshots/15_formulario_preenchido.png" width="220" alt="Formulário válido"><br>**Formulário válido**: categoria, distrito, data, descrição e autorização anônima |
+
+**Registro salvo, limiares e ajustes**
+
+| | | |
+|:---:|:---:|:---:|
+| <img src="assets/screenshots/13_ocorrencia_registrada.png" width="220" alt="Ocorrência registrada"><br>**Ocorrência registrada**: salva no aparelho com código aleatório, sem dados pessoais | <img src="assets/screenshots/17_limiares.png" width="220" alt="Limiares de alerta"><br>**Limiares de alerta**: formulário do gestor com validação de faixa por indicador | <img src="assets/screenshots/18_ajustes.png" width="220" alt="Ajustes"><br>**Ajustes**: tema, alto contraste, tamanho do texto, modo offline e privacidade |
+
+**Offline e acessibilidade**
+
+| | | |
+|:---:|:---:|:---:|
+| <img src="assets/screenshots/16_offline.png" width="220" alt="Modo offline"><br>**Modo offline**: dados em cache com aviso; a confiança dos alertas cai (85% → 64%) | <img src="assets/screenshots/20_alto_contraste.png" width="220" alt="Alto contraste"><br>**Alto contraste**: tema escuro com cores e bordas reforçadas | <img src="assets/screenshots/21_fonte_ampliada.png" width="220" alt="Fonte ampliada (150%)"><br>**Fonte ampliada (150%)**: layouts que quebram linha sem cortar texto |
 
 ## 5. Funcionalidades
 
-- [x] 12 telas com rotas nomeadas e passagem de parâmetros: Consentimento → Visão geral → Painel → Indicador → Alerta (e Alerta → Indicador)
+- [x] 10 telas (consentimento, visão geral, painel, indicador, alertas, detalhe do alerta, ocorrências, formulário, ajustes e limiares), com rotas nomeadas e passagem de parâmetros: Consentimento → Visão geral → Painel → Indicador → Alerta (e Alerta → Indicador)
 - [x] 3 dashboards distintos (**Clima**, **Recursos** e **Serviços**) com cards de KPI, mini-gráficos, variação semanal, tendência e uma seção própria de cada tema
 - [x] Alertas gerados por regras e previsões, cada um com **justificativa (evidências)**, **nível de confiança** (com o motivo da nota), **limitações** e sugestão de ação
 - [x] Aviso visível de que os alertas **apoiam, mas não substituem, a decisão humana**. Nenhuma ação é automática: o gestor apenas registra "revisado" ou "descartado"
